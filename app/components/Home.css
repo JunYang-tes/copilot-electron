@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.input {
+  width: 100%;
+}
+
+.input input {
+  width: 100%;
+  font-size: 36px;
+}
+
+.container h2 {
+  font-size: 5rem;
+}
+
+.container a {
+  font-size: 1.4rem;
+}
