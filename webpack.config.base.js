@@ -2,35 +2,29 @@
  * Base webpack config used across other specific configs
  */
 
-import path from 'path';
-import webpack from 'webpack';
-import { dependencies as externals } from './app/package.json';
+import path from 'path'
+import webpack from 'webpack'
+import { dependencies as externals } from './app/package.json'
+import { dependencies as externals1 } from './package.json'
 
 export default {
-  externals: Object.keys(externals || {
-    react: "React"
-
-  }),
+  externals: Object.keys(externals)
+    .concat(Object.keys(externals1)),
 
   module: {
-    rules: [{
-      test: /\.tsx?$/,
-      exclude: /node_modules/,
-      // use: {
-      //   loader: 'babel-loader'
-      // }
-      // @TODO: Waiting until awesome-typescript-loader can throw
-      //        warnings instead of errors. This makes sure that the dev
-      //        build will work even with typescript errors
-      use: {
-        loader: 'awesome-typescript-loader',
-        options: {
-          silent: true,
-          useBabel: true,
-          useCache: true
+    rules: [
+      {
+        test: /\.tsx?$/,
+        exclude: [/node_modules/, /\.d\.ts$/],
+        use: {
+          loader: 'awesome-typescript-loader',
+          options: {
+            silent: true,
+            useBabel: true,
+            useCache: true
+          }
         }
-      }
-    }]
+      }]
   },
 
   output: {

@@ -1,0 +1,17 @@
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:26:5] - UncaughtException:
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] ┌─  { Error: listen EADDRINUSE :::9991
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │       at Object.exports._errnoException (util.js:1050:11)
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │       at exports._exceptionWithHostPort (util.js:1073:20)
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │       at Server.setupListenHandle [as _listen2] (net.js:1263:14)
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │       at listenInCluster (net.js:1304:12)
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │       at Server.listen (net.js:1402:7)
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │       at Object.<anonymous> (/home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/services/SocketIO.js:14:8)
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │       at Object.<anonymous> (/home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/services/SocketIO.js:97:3)
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │       at Module._compile (module.js:571:32)
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │       at Object.Module._extensions..js (module.js:580:10)
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │       at Module.load (module.js:488:32)
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │     code: 'EADDRINUSE',
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │     errno: 'EADDRINUSE',
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │     syscall: 'listen',
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] │     address: '::',
+[2017-09-21 02:13:39] [ERROR] [copilot.main] [@process.on /home/jun/github/my/copilot-electron/node_modules/copilot-core/lib/index.js:27:5] └─    port: 9991 }
