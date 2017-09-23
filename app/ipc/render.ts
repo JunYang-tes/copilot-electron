@@ -12,4 +12,7 @@ export class IPCProxy {
     console.log("call active @main_process")
     return callerProxy.invoke("active")
   }
+  setHeight(height: number | string) {
+    return callerProxy.invoke("setHeight", height)
+  }
 }

@@ -29,7 +29,7 @@ class Item extends PureComponent<IItemProps, Object> {
 
 export interface IProps {
   data: IResult[],
-  onClick: (index: number) => void,
+  onClick: (index: number) => any,
   shortcut: string
 }
 export class List extends Component<IProps, Object> {

@@ -7,6 +7,7 @@ export interface IProps {
 export class Empty extends Component<IProps, any> {
 
   render() {
+    //TODO: UI beautify
     return (<div>
       {this.props.showNoResult ?
         <div>
@@ -22,8 +23,12 @@ export class Empty extends Component<IProps, any> {
       </ul>
     </div>)
   }
+  getPrefHeight() {
+    return 0.4
+  }
   shouldComponentUpdate?(nextProps: Readonly<IProps>, nextState: Readonly<any>, nextContext: any) {
-    console.log("should c update")
-    return false;
+    if (nextProps.showNoResult === this.props.showNoResult)
+      return false;
+    return true;
   }
 }
