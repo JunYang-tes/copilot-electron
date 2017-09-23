@@ -34,8 +34,6 @@ app/node_modules
 
 # App packaged
 release
-app/main.dev.js
-app/main.dev.js.map
 app/main.js
 app/main.js.map
 app/bundle.js
