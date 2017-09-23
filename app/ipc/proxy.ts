@@ -24,16 +24,22 @@ export interface IServices {
     [method: string]: Function
   }
 }
+export interface ISender extends EventEmitter {
+  send: (channel: string, ...args: any[]) => any
+}
+
+interface Event {
+  sender: ISender
+}
 
 export class CalleeProxy {
   private services: IServices
   constructor(emitter: EventEmitter, services?: IServices) {
     this.services = services || {}
-    emitter.on('call', async (args: ICallArgs) => {
-      console.log("call", args)
+    emitter.on('call', async (evt: Event, args: ICallArgs) => {
       const ser = this.services[args.namespace]
       if (!ser) {
-        emitter.emit("result", {
+        evt.sender.send("result", {
           id: args.id,
           error: new Error("ENONS")
         })
@@ -43,18 +49,18 @@ export class CalleeProxy {
       if (util.isFunction(fn)) {
         try {
           const ret = await fn(...args.args)
-          emitter.emit('result', {
+          evt.sender.send('result', {
             id: args.id,
             result: ret
           })
         } catch (e) {
-          emitter.emit('result', {
+          evt.sender.send('result', {
             id: args.id,
             error: e
           })
         }
       } else {
-        emitter.emit('result', {
+        evt.sender.send('result', {
           id: args.id,
           error: new Error('ENOMETHOD')
         })
@@ -75,8 +81,7 @@ export class CalleeProxy {
 
 
 export class CallerProxy {
-  private localEmitter: EventEmitter
-  private remoteEmitter: EventEmitter
+  private remoteEmitter: ISender
   private namespace: string
   private callId: number
   private callQueue: {
@@ -89,7 +94,7 @@ export class CallerProxy {
   private timeout: number
 
   constructor(
-    remoteEmitter: EventEmitter,
+    remoteEmitter: ISender,
     namespace = "main",
     timeout?: number) {
     this.callId = 0
@@ -98,7 +103,7 @@ export class CallerProxy {
     this.timeout = timeout || 1000
     this.callQueue = {}
 
-    remoteEmitter.on('result', (ret: ICallResult) => {
+    remoteEmitter.on('result', (evt: Event, ret: ICallResult) => {
       const id = ret.id
       if (id in this.callQueue) {
         const handler = this.callQueue[id]
@@ -125,7 +130,7 @@ export class CallerProxy {
         rej,
         timer: timeout
       }
-      this.remoteEmitter.emit('call', {
+      this.remoteEmitter.send('call', {
         namespace: this.namespace,
         method: param.method,
         id,

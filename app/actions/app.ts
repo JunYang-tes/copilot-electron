@@ -1,6 +1,5 @@
 import { Dispatch, Action } from "redux"
 import { CopilotProxy } from "../ipc/copilot"
-const copilot = new CopilotProxy()
 
 
 export const RUN_START = 'RUN_START'
@@ -13,7 +12,7 @@ export function startUp() {
   return async (dispatch: Dispatch<Action>) => {
     let error
     try {
-      await copilot.startUp()
+      await CopilotProxy.startUp()
     } catch (e) {
       error = e
     }
@@ -27,7 +26,7 @@ export function startUp() {
 }
 export function run(idx: number) {
   return async (dispatch: Dispatch<Action>) => {
-    await copilot.run(idx)
+    await CopilotProxy.run(idx)
   }
 }
 
@@ -42,7 +41,7 @@ export function handle(input: string) {
       type: RUN_START
     })
     try {
-      const items = await copilot.handle(input)
+      const items = await CopilotProxy.handle(input)
       dispatch({
         type: RUN_END,
         data: {
