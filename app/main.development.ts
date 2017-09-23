@@ -1,10 +1,10 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, screen } from 'electron';
 import MenuBuilder from './menu';
 import * as ipc from "./ipc/main"
 import * as copilot from "copilot-core"
 
 let loaded = false
-let mainWindow: any
+let mainWindow: Electron.BrowserWindow
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -46,20 +46,69 @@ app.on('ready', async () => {
     await installExtensions();
   }
 
+  //It's seems no way to get the display which holds mainWindow
+  let display = screen.getPrimaryDisplay()
+  let minHeight = 48 + 8 * 2
+  let winHeight = .65 * display.size.height
+  let winWidth = .50 * display.size.width
+
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: winWidth,
+    height: winHeight,
     center: true,
     // transparent: true,
     frame: false
   });
+
+  let { x, y } = mainWindow.getBounds()
 
   ipc.register({
     active() {
       console.log("active")
       mainWindow.show()
       mainWindow.focus()
+    },
+    hide() {
+      mainWindow.hide()
+    },
+    setHeight(height: number | ("maximum" | "fullscreen" | "normal")) {
+      console.log("setHeight", height)
+      if (typeof height === "number") {
+        let bound = mainWindow.getBounds()
+        if (height < 1) {
+          height = height * display.size.height
+        } else {
+          height += minHeight
+        }
+        if (height < 50) {
+          return;
+        }
+        if (height > winHeight) {
+          height = winHeight
+        }
+        bound.width = winWidth
+        bound.height = height
+        bound.x = x;
+        bound.y = y;
+        mainWindow.setFullScreen(false)
+        mainWindow.setBounds(bound)
+      } else {
+        switch (height) {
+          case "maximum":
+            mainWindow.maximize()
+            break;
+          case "fullscreen":
+            mainWindow.setFullScreen(true)
+            break;
+          case "normal":
+            mainWindow.unmaximize()
+            break;
+          default:
+            console.log("Unexpected height:", height)
+            break;
+        }
+      }
     }
   })
 
@@ -101,6 +150,6 @@ app.on('ready', async () => {
   });
 
   mainWindow.on('closed', () => {
-    mainWindow = null;
+    // mainWindow = null;
   });
 });

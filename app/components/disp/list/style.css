@@ -1,23 +1,21 @@
-.list {
-  flex: 1 1 auto;
-  overflow-y: auto
-}
 
-.item:nth-child(odd){
+
+.item:nth-child(odd) {
   background-color: white;
 }
 
 .item {
   display: flex;
-  background-color:rgba(128, 128, 128, 0.28);
+  background-color: rgba(128, 128, 128, 0.28);
   transition: width 0.5s;
   transition: background-color 0.5s;
-  margin:3px 0;
+  margin: 3px 0;
 }
 
 .item:hover {
-  background-color:rgba(0, 149, 200, 0.5);
+  background-color: rgba(0, 149, 200, 0.5);
 }
+
 .item:active {
   background: #0095C8;
 }

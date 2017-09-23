@@ -30,6 +30,7 @@ export class CalleeProxy {
   constructor(emitter: EventEmitter, services?: IServices) {
     this.services = services || {}
     emitter.on('call', async (args: ICallArgs) => {
+      console.log("call", args)
       const ser = this.services[args.namespace]
       if (!ser) {
         emitter.emit("result", {
