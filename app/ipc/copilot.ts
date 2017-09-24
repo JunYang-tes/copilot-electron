@@ -1,20 +1,15 @@
-import { remote } from 'electron'
-const { ipcMain } = remote
-import { CallerProxy } from "./proxy"
+import { RenderSideCaller } from "./render"
 
-const callerProxy = new CallerProxy(ipcMain,
+const callerProxy = new RenderSideCaller(
   "copilot", 1000 * 60)
 
-export class CopilotProxy {
-  constructor() {
-
-  }
+export const CopilotProxy = {
   startUp() {
     return callerProxy.invoke("startUp")
-  }
+  },
   handle(input: string): any {
     return callerProxy.invoke("handle", input)
-  }
+  },
   run(idx: number) {
     return callerProxy.invoke("run", idx)
   }

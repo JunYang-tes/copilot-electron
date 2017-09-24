@@ -12,7 +12,10 @@ mainProxy.active()
 const store = configureStore.configureStore()
 store.dispatch(startUp())
 
-
+import { Shortcut } from "./ipc/shortcut"
+new Shortcut().register("Ctrl+B", () => {
+  console.log("ctrl b")
+})
 render(
   <AppContainer>
     <Root store={store} history={configureStore.history} />

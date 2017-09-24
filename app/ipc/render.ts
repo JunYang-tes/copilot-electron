@@ -1,8 +1,15 @@
-import { remote } from 'electron'
+import { remote, ipcRenderer } from 'electron'
 const { ipcMain } = remote
 import { CallerProxy } from "./proxy"
 
-const callerProxy = new CallerProxy(ipcMain)
+export class RenderSideCaller extends CallerProxy {
+  constructor(namespace = "main", timeout?: number) {
+    super(ipcRenderer, namespace, timeout)
+  }
+}
+
+
+const callerProxy = new RenderSideCaller()
 
 export class IPCProxy {
   constructor() {
