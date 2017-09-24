@@ -2108,6 +2108,10 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
+combokeys@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/combokeys/-/combokeys-3.0.0.tgz#955c59a3959af40d26846ab6fc3c682448e7572e"
+
 commander@2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.6.0.tgz#9df7e52fb2a0cb0fb89058ee80c3104225f37e1d"
@@ -2975,6 +2979,10 @@ electron-download@^3.0.1, electron-download@^3.1.0:
     semver "^5.3.0"
     sumchecker "^1.2.0"
 
+electron-is-accelerator@^0.1.0:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/electron-is-accelerator/-/electron-is-accelerator-0.1.2.tgz#509e510c26a56b55e17f863a4b04e111846ab27b"
+
 electron-is-dev@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.1.2.tgz#8a1043e32b3a1da1c3f553dce28ce764246167e3"
@@ -2982,6 +2990,13 @@ electron-is-dev@^0.1.0:
 electron-localshortcut@^0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/electron-localshortcut/-/electron-localshortcut-0.6.1.tgz#c4e268c38a6e42f40de5618fc906d1ed608f11aa"
+
+electron-localshortcut@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/electron-localshortcut/-/electron-localshortcut-2.0.2.tgz#6a1adcd6514c957328ec7912f5ccb5e1c10706db"
+  dependencies:
+    debug "^2.6.8"
+    electron-is-accelerator "^0.1.0"
 
 electron-osx-sign@0.4.4:
   version "0.4.4"
@@ -5794,13 +5809,13 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-nan@^2.3.0, nan@^2.3.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
-
-nan@~2.7.0:
+nan@^2.3.0, nan@~2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.7.0.tgz#d95bf721ec877e08db276ed3fc6eb78f9083ad46"
+
+nan@^2.3.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
 
 native-promise-only@^0.8.1:
   version "0.8.1"
@@ -7385,13 +7400,13 @@ resolve@1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
-resolve@^1.1.7, resolve@^1.2.0, resolve@^1.3.2:
+resolve@^1.1.7, resolve@^1.3.2:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.3.3.tgz#655907c3469a8680dc2de3a275a8fdd69691f0e5"
   dependencies:
     path-parse "^1.0.5"
 
-resolve@~1.4.0:
+resolve@^1.2.0, resolve@~1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.4.0.tgz#a75be01c53da25d934a98ebd0e4c4a7312f92a86"
   dependencies:

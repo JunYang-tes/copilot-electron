@@ -83,7 +83,7 @@ export class CalleeProxy {
 export class CallerProxy {
   private remoteEmitter: ISender
   private namespace: string
-  private callId: number
+  private static callId = 0
   private callQueue: {
     [id: number]: {
       res: (...args: any[]) => void,
@@ -97,7 +97,6 @@ export class CallerProxy {
     remoteEmitter: ISender,
     namespace = "main",
     timeout?: number) {
-    this.callId = 0
     this.remoteEmitter = remoteEmitter
     this.namespace = namespace
     this.timeout = timeout || 1000
@@ -118,7 +117,7 @@ export class CallerProxy {
     })
   }
   public call<T>(param: ICallParam): Promise<T> {
-    const id = this.callId++
+    const id = CallerProxy.callId++
     return new Promise<T>((res, rej) => {
       const timeout = setTimeout(() => {
         const handler = this.callQueue[id]
@@ -146,3 +145,76 @@ export class CallerProxy {
     })
   }
 }
+/**
+ * In order to delegate a render callback to main.
+ * Use a wrapped event emitter (such as new EventEmitterWrapper(ipcMain)), CallerProxy 
+ * and CalleeProxy to implementscall proxy 
+ * 
+ * Example: local-shortcut.ts
+ * 
+ */
+export class EventEmitterWrapper implements ISender {
+  private emitter: EventEmitter
+  constructor(emitter: EventEmitter) {
+    this.emitter = emitter
+  }
+  send(channel: string, ...args: any[]) {
+    let sender = this
+    this.emitter.emit(channel, {
+      sender: {
+        send(channel: string, ...arg: any[]) {
+          console.log("@@@@@", channel, arg)
+          sender.send(channel, ...arg)
+        }
+      }
+    }, ...args)
+  }
+  //delegate to this.emitter
+  addListener(event: string | symbol, listener: Function): this {
+    throw new Error("Method not implemented.");
+  }
+  on(event: string | symbol, listener: Function): this {
+    throw new Error("Method not implemented.");
+  }
+  once(event: string | symbol, listener: Function): this {
+    throw new Error("Method not implemented.");
+  }
+  prependListener(event: string | symbol, listener: Function): this {
+    throw new Error("Method not implemented.");
+  }
+  prependOnceListener(event: string | symbol, listener: Function): this {
+    throw new Error("Method not implemented.");
+  }
+  removeListener(event: string | symbol, listener: Function): this {
+    throw new Error("Method not implemented.");
+  }
+  removeAllListeners(event?: string | symbol | undefined): this {
+    throw new Error("Method not implemented.");
+  }
+  setMaxListeners(n: number): this {
+    throw new Error("Method not implemented.");
+  }
+  getMaxListeners(): number {
+    throw new Error("Method not implemented.");
+  }
+  listeners(event: string | symbol): Function[] {
+    throw new Error("Method not implemented.");
+  }
+  emit(event: string | symbol, ...args: any[]): boolean {
+    throw new Error("Method not implemented.");
+  }
+  eventNames(): (string | symbol)[] {
+    throw new Error("Method not implemented.");
+  }
+  listenerCount(type: string | symbol): number {
+    throw new Error("Method not implemented.");
+  }
+}
+//delegate to EventEmitter's method
+Object.keys(EventEmitter.prototype)
+  .filter(key => util.isFunction((EventEmitter.prototype as any)[key]))
+  .forEach(key => (EventEmitterWrapper.prototype as any)[key] = function (...args: any[]) {
+    console.log(`@${key}`)
+    this.emitter[key](...args)
+    return this
+  })

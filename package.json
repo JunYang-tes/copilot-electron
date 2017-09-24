@@ -198,8 +198,10 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
+    "combokeys": "^3.0.0",
     "copilot-core": "^0.0.37",
     "electron-debug": "^1.1.0",
+    "electron-localshortcut": "^2.0.2",
     "extract-text-webpack-plugin": "^2.1.0",
     "font-awesome": "^4.7.0",
     "history": "^4.6.1",
