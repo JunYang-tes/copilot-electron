@@ -3,7 +3,15 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Copilot</title>
+  <!--
+    //NOTE: 如果有其它窗口的标题包含本窗口的名字，将导致BrowserWindow.focus 的怪异
+    行为。
+    System: Linux
+    WM: xfwm4
+    electron: v1.7.6
+    node: v8.1.1
+  -->
+  <title>--CopilotEl--</title>
   <script>
     (function () {
       if (!process.env.HOT) {

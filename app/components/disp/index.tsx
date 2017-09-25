@@ -18,7 +18,7 @@ export class Display extends Component<props, any>{
   render() {
     let Comp = this.props.component
     return (<div className={styles.scrollable}>
-      <div ref={ele => this.ele = ele}>
+      <div className="pref-height" ref={ele => this.ele = ele}>
         <Comp ref={(ele: any) => this.child = ele} />
       </div>
     </div>)

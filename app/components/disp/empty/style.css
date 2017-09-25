@@ -1,0 +1,23 @@
+.empty {}
+
+.noResult {
+  margin-bottom: 130px;
+}
+
+.text {
+  margin: 10px 0;
+  color: rgba(0, 0, 0, 0.83);
+}
+
+.left {
+  display: inline-block;
+  text-align: right;
+  width: 50%;
+  padding-right: 5px;
+}
+
+.right {
+  display: inline-block;
+  width: 50%;
+  padding-left: 5px;
+}

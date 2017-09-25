@@ -33,6 +33,7 @@ export class Input extends Component<IProps, IState>{
   static defaultProps: IProps = {
     throttle: 100,
   }
+  input: HTMLElement
 
   constructor(props: IProps) {
     super(props)
@@ -40,6 +41,8 @@ export class Input extends Component<IProps, IState>{
 
   render() {
     return <input
+      ref={input => this.input = input}
+      autoFocus
       onKeyUp={(e) => this.onKeyUp({
         alt: e.altKey,
         ctrl: e.ctrlKey,
@@ -50,6 +53,10 @@ export class Input extends Component<IProps, IState>{
       })}
       onChange={(e) => this.onChange(e.target.value)}
     />
+  }
+
+  setFocus() {
+    this.input.focus()
   }
 
   componentWillReceiveProps(nextProps: IProps) {

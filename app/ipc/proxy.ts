@@ -160,10 +160,11 @@ export class EventEmitterWrapper implements ISender {
   }
   send(channel: string, ...args: any[]) {
     let sender = this
+    //This not work.
+    // this.emitter.emit(channel, { sender }, ...args)
     this.emitter.emit(channel, {
       sender: {
         send(channel: string, ...arg: any[]) {
-          console.log("@@@@@", channel, arg)
           sender.send(channel, ...arg)
         }
       }

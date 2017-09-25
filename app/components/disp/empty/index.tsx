@@ -1,25 +1,36 @@
 import React from 'react'
 import { IResult } from "../../../types"
 import { Component } from 'react'
+
+const styles = require("./style.css")
 export interface IProps {
   showNoResult: boolean
 }
+const texts = [
+  ["Ctrl + Backspace", "Delete a word"],
+  ["Alt + Space", "Active window"],
+  ["Alt + [1-9]", "Run item"],
+]
+
+
 export class Empty extends Component<IProps, any> {
 
   render() {
     //TODO: UI beautify
-    return (<div>
-      {this.props.showNoResult ?
-        <div>
-          No result
-        </div> : ""}
+    return (<div className={styles.empty}>
+      <div className={styles.noResult}>
+        {this.props.showNoResult ?
+          "No result"
+          : " "}
+      </div>
       <ul>
-        <li>
-          ctrl+backspace : Delete a word
-        </li>
-        <li>
-          alt+[1-9] : Run item
-        </li>
+        {
+          texts.map((text, idx) =>
+            <li className={styles.text} key={idx}>
+              <span className={styles.left}>{text[0]}</span>
+              <span className={styles.right}>{text[1]}</span>
+            </li>)
+        }
       </ul>
     </div>)
   }

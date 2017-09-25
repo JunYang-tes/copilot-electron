@@ -1,5 +1,6 @@
 import { Dispatch, Action } from "redux"
 import { CopilotProxy } from "../ipc/copilot"
+import { MainWinProxy } from "../ipc/main-win-proxy"
 
 
 export const RUN_START = 'RUN_START'
@@ -24,7 +25,8 @@ export function startUp() {
     })
   }
 }
-export function run(idx: number) {
+export function run(idx: number, hide = true) {
+  hide && MainWinProxy.hide()
   return async (dispatch: Dispatch<Action>) => {
     await CopilotProxy.run(idx)
   }
