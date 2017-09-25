@@ -10,6 +10,9 @@ export interface IState {
   result: {
     type: string
     items: IResult[]
+  },
+  settings: {
+    activeShortcut: string
   }
 }
 
@@ -22,6 +25,9 @@ const initial: IState = {
   result: {
     type: "list",
     items: []
+  },
+  settings: {
+    activeShortcut: "alt+space"
   }
 }
 

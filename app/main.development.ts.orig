@@ -68,6 +68,7 @@ app.on('ready', async () => {
     register(accelerator: string, cb: () => any) {
       console.log("register")
       localShortcut.register(accelerator, () => {
+        console.log(accelerator, cb)
         cb()
       })
       return "@register"
@@ -76,9 +77,6 @@ app.on('ready', async () => {
       console.log("@unregisterAll")
       localShortcut.unregisterAll()
       return "@unregisterAll"
-    },
-    unregister(accelerator: string) {
-      localShortcut.unregister(accelerator)
     }
   }, "shortcut")
 
@@ -111,8 +109,8 @@ app.on('ready', async () => {
         }
         bound.width = winWidth
         bound.height = height
-        // bound.x = x;
-        // bound.y = y;
+        bound.x = x;
+        bound.y = y;
         mainWindow.setFullScreen(false)
         mainWindow.setBounds(bound)
       } else {

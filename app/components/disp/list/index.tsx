@@ -6,7 +6,7 @@ interface IItemProps {
   title: string,
   text: string,
   icon: string,
-  shortcut: string,
+  shortcut?: string,
   index: number,
   onClick?: (idx: number) => void
 }
@@ -22,6 +22,9 @@ class Item extends PureComponent<IItemProps, Object> {
           <div>{title}</div>
           <div>{text}</div>
         </div>
+        {
+          shortcut && <div className={styles.shortcut}>{shortcut}</div>
+        }
       </div>
     )
   }
@@ -30,6 +33,8 @@ class Item extends PureComponent<IItemProps, Object> {
 export interface IProps {
   data: IResult[],
   onClick: (index: number) => any,
+  bindShortcut?: () => void,
+  unBindShortcut?: () => void,
   shortcut: string
 }
 export class List extends Component<IProps, Object> {
@@ -49,9 +54,15 @@ export class List extends Component<IProps, Object> {
           text={item.text}
           icon={item.icon}
           onClick={onClick}
-          shortcut={shortcut}
+          shortcut={idx < 9 ? `${shortcut}+${idx + 1}` : undefined}
         />)
       }
     </div>)
+  }
+  componentDidMount() {
+    this.props.bindShortcut && this.props.bindShortcut()
+  }
+  componentWillUnmount() {
+    this.props.unBindShortcut && this.props.unBindShortcut()
   }
 }
