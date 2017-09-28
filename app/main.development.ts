@@ -49,7 +49,7 @@ app.on('ready', async () => {
 
   //It's seems no way to get the display which holds mainWindow
   let display = screen.getPrimaryDisplay()
-  let minHeight = 48 + 8 * 2
+  let minHeight = 48 + 24 * 2
   let winHeight = .65 * display.size.height
   let winWidth = .50 * display.size.width
 
