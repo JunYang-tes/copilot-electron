@@ -33,7 +33,7 @@ export class Input extends Component<IProps, IState>{
   static defaultProps: IProps = {
     throttle: 100,
   }
-  input: HTMLElement
+  input:HTMLInputElement
 
   constructor(props: IProps) {
     super(props)
@@ -57,6 +57,10 @@ export class Input extends Component<IProps, IState>{
 
   setFocus() {
     this.input.focus()
+  }
+
+  select(){
+    this.input.select()
   }
 
   componentWillReceiveProps(nextProps: IProps) {

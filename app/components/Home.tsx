@@ -40,7 +40,9 @@ export class Home extends Component<IProps, Object> {
   }
   onWinFocus = () => {
     console.log("focused")
-    this.input.getWrappedInstance().setFocus()
+    const input = this.input.getWrappedInstance()
+    input.setFocus()
+    input.select()
   }
   componentDidMount() {
     remote.getCurrentWindow()
