@@ -1,6 +1,7 @@
 import React from 'react'
 import { IResult } from "../../../types"
 import { Component, PureComponent } from 'react'
+import { HightLight } from "../../high-light"
 const styles = require("./style.css")
 interface IItemProps {
   title: string,
@@ -19,8 +20,8 @@ class Item extends PureComponent<IItemProps, Object> {
           <img src={icon} />
         </div>
         <div>
-          <div>{title}</div>
-          <div>{text}</div>
+          <div> <HightLight>{title}</HightLight></div>
+          <div><HightLight>{text}</HightLight></div>
         </div>
         {
           shortcut && <div className={styles.shortcut}>{shortcut}</div>
