@@ -9,6 +9,8 @@ export class HightLight extends PureComponent<IProp, any> {
     let text = ""
     if (typeof this.props.children === "string") {
       text = this.props.children
+    } else {
+      text = (this.props.children as string[]).join("")
     }
     return (<span>
       {
