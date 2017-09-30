@@ -42,19 +42,22 @@ export function handle(input: string) {
     dispatch({
       type: RUN_START
     })
+    let items
     try {
-      const items = await CopilotProxy.handle(input)
-      dispatch({
-        type: RUN_END,
-        data: {
-          items
-        }
-      })
+      items = await CopilotProxy.handle(input)
     } catch (e) {
       dispatch({
         type: RUN_ERR,
         data: {
           error: e
+        }
+      })
+    }
+    if (items) {
+      dispatch({
+        type: RUN_END,
+        data: {
+          items
         }
       })
     }
